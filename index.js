@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
+
 const swaggerUi = require("swagger-ui-express");
-const swaggerJSDoc = require("swagger-jsdoc");
+const swagger = require("./swagger");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -17,26 +18,6 @@ mongoose.connect(process.env.URI, {
   useUnifiedTopology: true,
 });
 
-const options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "cv-gen-backend API",
-      version: "1.0.0",
-      description: "API cv generator application created for RAD module.",
-    },
-    servers: [
-      {
-        url: "http://localhost:" + PORT,
-        description: "Local server",
-      },
-    ],
-  },
-  apis: ["./api/routes/*.js"], // Path to the API routes files
-};
-
-const swaggerSpec = swaggerJSDoc(options);
-
 app.use(cors());
 
 app.use(express.json());
@@ -46,7 +27,7 @@ app.use(
   })
 );
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swagger);
 app.use("/edu-details", eduDetailsRoute);
 
 app.use((req, res, next) => {
