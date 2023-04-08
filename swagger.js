@@ -3,6 +3,8 @@ const swaggerJSDoc = require("swagger-jsdoc");
 const dotenv = require("dotenv");
 dotenv.config();
 
+const CSS_URL =
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 const PORT = process.env.PORT || 8080;
 
 const options = {
@@ -29,4 +31,4 @@ const options = {
 
 const swaggerSpec = swaggerJSDoc(options);
 
-module.exports = swaggerUi.setup(swaggerSpec);
+module.exports = swaggerUi.setup(swaggerSpec, { customCssUrl: CSS_URL });
