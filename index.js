@@ -10,6 +10,7 @@ dotenv.config();
 
 // Routes
 const eduDetailsRoute = require("./api/routes/edu.controller");
+const workDetailsRoute = require("./api/routes/work.controller");
 const { authenticateJWT } = require("./api/routes/auth.controller");
 
 const PORT = process.env.PORT;
@@ -25,6 +26,7 @@ app.use(
 
 app.use("/api-docs", swaggerUi.serve, swagger);
 app.use("/edu-details", /* authenticateJWT, */ eduDetailsRoute);
+app.use("/work-details", /* authenticateJWT, */ workDetailsRoute);
 
 app.use((req, res, next) => {
   const error = new Error("Not found.");
