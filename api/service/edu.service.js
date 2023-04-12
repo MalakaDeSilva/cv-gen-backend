@@ -11,12 +11,20 @@ async function getEduDetailsByUser(email) {
   });
 }
 
-async function createUpdateEduDetails(eduDetail) {
-  const eduRef = db.collection("education").doc();
+async function createUpdateEduDetails(eduDetail, doc = "") {
+  if (doc == "") {
+    const eduRef = db.collection("education").doc();
 
-  const res = await eduRef.set(eduDetail);
+    const res = await eduRef.set(eduDetail);
 
-  return res;
+    return res;
+  } else {
+    const eduRef = db.collection("education").doc(doc);
+
+    const res = await eduRef.set(eduDetail);
+
+    return res;
+  }
 }
 
 async function deleteEduDetailsByDoc(docId) {
