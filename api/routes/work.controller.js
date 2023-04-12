@@ -2,33 +2,33 @@ const express = require("express");
 
 const router = express.Router();
 
-const eduDetailsService = require("../service/edu.service");
+const workDetailsService = require("../service/work.service");
 
 /**
  * @swagger
  * tags:
- *   name: Education
- *   description: API for managing education details
+ *   name: Work
+ *   description: API for managing work details
  */
 
 /**
  * @swagger
- * /edu-details/by-user/{userId}:
+ * /work-details/by-user/{userId}:
  *   get:
- *     summary: Returns a list of education details for a selected user
- *     description: Returns a list of education details for a selected user
- *     tags: [Education]
+ *     summary: Returns a list of work details for a selected user
+ *     description: Returns a list of work details for a selected user
+ *     tags: [Work]
  *     parameters:
  *       - name: userId
  *         in: path
  *         required: true
- *         description: Email id of the user to retrieve edu details
+ *         description: Email id of the user to retrieve work details
  *         schema:
  *           type: string
  *           format: email
  *     responses:
  *       '200':
- *         description: Education details are retrieved successfully.
+ *         description: Work details are retrieved successfully.
  *       '403':
  *         description: Forbidden request.
  *       '401':
@@ -36,7 +36,7 @@ const eduDetailsService = require("../service/edu.service");
  */
 router.get("/by-user/:email", async (req, res, next) => {
   const email = req.params.email;
-  let result = await eduDetailsService.getEduDetailsByUser(email);
+  let result = await workDetailsService.getWorkDetailsByUser(email);
 
   if (typeof result["error"] != "undefined") {
     res.status(200).json(result);
@@ -47,11 +47,11 @@ router.get("/by-user/:email", async (req, res, next) => {
 
 /**
  * @swagger
- * /edu-details/:
+ * /work-details/:
  *   post:
- *     summary: Create a new education details object for a given user
- *     description: Creates a new education details object for a given user
- *     tags: [Education]
+ *     summary: Create a new work details object for a given user
+ *     description: Creates a new work details object for a given user
+ *     tags: [Work]
  *     requestBody:
  *       required: true
  *       content:
@@ -62,15 +62,15 @@ router.get("/by-user/:email", async (req, res, next) => {
  *               user:
  *                 type: string
  *                 description: The email address of the user
- *               institute:
+ *               company:
  *                 type: string
- *                 description: The institute of the user
+ *                 description: The company of the user
  *               period:
  *                 type: string
  *                 description: The period of time
- *               graduated:
- *                 type: boolean
- *                 description: Graduation status
+ *               remarks:
+ *                 type: string
+ *                 description: Anything that needs to be highlighted
  *     responses:
  *       '201':
  *         description: The details were added successfully.
@@ -82,14 +82,14 @@ router.get("/by-user/:email", async (req, res, next) => {
  *         description: Unauthorized request.
  */
 router.post("/", async (req, res, next) => {
-  let eduDetails = {
+  let workDetails = {
     user: req.body.user,
-    institute: req.body.institute,
+    company: req.body.company,
     period: req.body.period,
-    graduated: req.body.graduated,
+    remarks: req.body.remarks,
   };
 
-  let result = await eduDetailsService.createUpdateEduDetails(eduDetails);
+  let result = await workDetailsService.createUpdateWorkDetails(workDetails);
 
   if (typeof result["error"] != "undefined") {
     res.status(200).json(result);
@@ -100,11 +100,11 @@ router.post("/", async (req, res, next) => {
 
 /**
  * @swagger
- * /edu-details/:
+ * /work-details/:
  *   put:
- *     summary: Updates a new education details object for a given user
- *     description: Updates a new education details object for a given user
- *     tags: [Education]
+ *     summary: Updates a new work details object for a given user
+ *     description: Updates a new work details object for a given user
+ *     tags: [Work]
  *     requestBody:
  *       required: true
  *       content:
@@ -115,15 +115,15 @@ router.post("/", async (req, res, next) => {
  *               user:
  *                 type: string
  *                 description: The email address of the user
- *               institute:
+ *               company:
  *                 type: string
- *                 description: The institute of the user
+ *                 description: The company of the user
  *               period:
  *                 type: string
  *                 description: The period of time
- *               graduated:
- *                 type: boolean
- *                 description: Graduation status
+ *               remarks:
+ *                 type: string
+ *                 description: Anything that needs to be highlighted
  *               docId:
  *                 type: string
  *                 description: Id of the document
@@ -138,17 +138,17 @@ router.post("/", async (req, res, next) => {
  *         description: Unauthorized request.
  */
 router.put("/", async (req, res, next) => {
-  let eduDetails = {
+  let workDetails = {
     user: req.body.user,
-    institute: req.body.institute,
+    company: req.body.company,
     period: req.body.period,
-    graduated: req.body.graduated,
+    remarks: req.body.remarks,
   };
 
   let docId = req.body.docId;
 
-  let result = await eduDetailsService.createUpdateEduDetails(
-    eduDetails,
+  let result = await workDetailsService.createUpdateWorkDetails(
+    workDetails,
     docId
   );
 
@@ -161,21 +161,21 @@ router.put("/", async (req, res, next) => {
 
 /**
  * @swagger
- * /edu-details/by-doc/{docId}:
+ * /work-details/by-doc/{docId}:
  *   delete:
- *     summary: Deletes a education details for a selected user
- *     description: Deletes a education details for a selected user
- *     tags: [Education]
+ *     summary: Deletes a work details for a selected user
+ *     description: Deletes a work details for a selected user
+ *     tags: [Work]
  *     parameters:
  *       - name: docId
  *         in: path
  *         required: true
- *         description: Id of the edu detail document
+ *         description: Id of the work detail document
  *         schema:
  *           type: string
  *     responses:
  *       '204':
- *         description: Education details are deleted successfully.
+ *         description: Work details are deleted successfully.
  *       '403':
  *         description: Forbidden request.
  *       '401':
@@ -184,7 +184,7 @@ router.put("/", async (req, res, next) => {
 router.delete("/by-doc/:docId", async (req, res, next) => {
   const docId = req.params.docId;
 
-  let result = await eduDetailsService.deleteEduDetailsByDoc(docId);
+  let result = await workDetailsService.deleteWorkDetailsByDoc(docId);
 
   if (typeof result["error"] != "undefined") {
     res.status(200).json(result);
@@ -195,21 +195,21 @@ router.delete("/by-doc/:docId", async (req, res, next) => {
 
 /**
  * @swagger
- * /edu-details/by-user/{userId}:
+ * /work-details/by-user/{userId}:
  *   delete:
- *     summary: Deletes a education details for a selected user
- *     description: Deletes a education details for a selected user
- *     tags: [Education]
+ *     summary: Deletes a work details for a selected user
+ *     description: Deletes a work details for a selected user
+ *     tags: [Work]
  *     parameters:
  *       - name: userId
  *         in: path
  *         required: true
- *         description: Email of the edu detail document
+ *         description: Email of the work detail document
  *         schema:
  *           type: string
  *     responses:
  *       '204':
- *         description: Education details are deleted successfully.
+ *         description: Work details are deleted successfully.
  *       '403':
  *         description: Forbidden request.
  *       '401':
@@ -218,7 +218,7 @@ router.delete("/by-doc/:docId", async (req, res, next) => {
 router.delete("/by-user/:email", async (req, res, next) => {
   const email = req.params.email;
 
-  let result = await eduDetailsService.deleteEduDetailsByUser(email);
+  let result = await workDetailsService.deleteWorkDetailsByUser(email);
 
   if (typeof result["error"] != "undefined") {
     res.status(200).json(result);
