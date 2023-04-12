@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const mongoose = require("mongoose");
 
 const swaggerUi = require("swagger-ui-express");
 const swagger = require("./swagger");
@@ -11,12 +10,9 @@ dotenv.config();
 
 // Routes
 const eduDetailsRoute = require("./api/routes/edu.controller");
+const { authenticateJWT } = require("./api/routes/auth.controller");
 
 const PORT = process.env.PORT;
-mongoose.connect(process.env.URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 
 app.use(cors());
 
@@ -28,7 +24,7 @@ app.use(
 );
 
 app.use("/api-docs", swaggerUi.serve, swagger);
-app.use("/edu-details", eduDetailsRoute);
+app.use("/edu-details", /* authenticateJWT, */ eduDetailsRoute);
 
 app.use((req, res, next) => {
   const error = new Error("Not found.");
