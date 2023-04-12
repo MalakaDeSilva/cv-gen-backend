@@ -163,8 +163,8 @@ router.put("/", async (req, res, next) => {
  * @swagger
  * /work-details/by-doc/{docId}:
  *   delete:
- *     summary: Deletess a work details for a selected user
- *     description: Deletess a work details for a selected user
+ *     summary: Deletes a work details for a selected user
+ *     description: Deletes a work details for a selected user
  *     tags: [Work]
  *     parameters:
  *       - name: docId
@@ -197,8 +197,8 @@ router.delete("/by-doc/:docId", async (req, res, next) => {
  * @swagger
  * /work-details/by-user/{userId}:
  *   delete:
- *     summary: Deletess a work details for a selected user
- *     description: Deletess a work details for a selected user
+ *     summary: Deletes a work details for a selected user
+ *     description: Deletes a work details for a selected user
  *     tags: [Work]
  *     parameters:
  *       - name: userId
