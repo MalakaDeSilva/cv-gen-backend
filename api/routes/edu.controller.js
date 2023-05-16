@@ -71,6 +71,9 @@ router.get("/by-user/:email", async (req, res, next) => {
  *               graduated:
  *                 type: boolean
  *                 description: Graduation status
+ *               remarks:
+ *                 type: string
+ *                 description: Remarks
  *     responses:
  *       '201':
  *         description: The details were added successfully.
@@ -87,6 +90,7 @@ router.post("/", async (req, res, next) => {
     institute: req.body.institute,
     period: req.body.period,
     graduated: req.body.graduated,
+    remarks: req.body.remarks,
   };
 
   let result = await eduDetailsService.createUpdateEduDetails(eduDetails);
@@ -127,6 +131,9 @@ router.post("/", async (req, res, next) => {
  *               docId:
  *                 type: string
  *                 description: Id of the document
+ *               remarks:
+ *                 type: string
+ *                 description: Remarks
  *     responses:
  *       '201':
  *         description: The details were added successfully.
@@ -143,6 +150,7 @@ router.put("/", async (req, res, next) => {
     institute: req.body.institute,
     period: req.body.period,
     graduated: req.body.graduated,
+    remarks: req.body.remarks,
   };
 
   let docId = req.body.docId;

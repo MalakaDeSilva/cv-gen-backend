@@ -2,7 +2,7 @@ const db = require("../../firebase");
 
 async function getSkillsByUser(email) {
   const snapshot = await db
-    .collection("skilss")
+    .collection("skills")
     .where("user", "==", email)
     .get();
 

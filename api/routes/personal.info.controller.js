@@ -71,6 +71,9 @@ router.get("/by-user/:email", async (req, res, next) => {
  *               address:
  *                 type: string
  *                 description: Address of the user
+ *               phone:
+ *                 type: string
+ *                 description: Phone number of the user
  *               nic:
  *                 type: string
  *                 description: National Identity Card number of the user
@@ -83,6 +86,9 @@ router.get("/by-user/:email", async (req, res, next) => {
  *               maritalStatus:
  *                 type: string
  *                 description: Marital status of the user
+ *               aboutme:
+ *                 type: string
+ *                 description: Small introduction to yourself
  *     responses:
  *       '201':
  *         description: The details were added successfully.
@@ -99,10 +105,12 @@ router.post("/", async (req, res, next) => {
     full_name: req.body.fullName,
     dob: req.body.dob,
     address: req.body.address,
+    phone: req.body.phone,
     nic: req.body.nic,
     gender: req.body.gender,
     nationality: req.body.nationality,
     marital_status: req.body.maritalStatus,
+    description: req.body.aboutme,
   };
 
   let result = await personalDetailsService.createUpdatePersonalDetails(
@@ -142,6 +150,9 @@ router.post("/", async (req, res, next) => {
  *               address:
  *                 type: string
  *                 description: Address of the user
+ *               phone:
+ *                 type: string
+ *                 description: Phone number of the user
  *               nic:
  *                 type: string
  *                 description: National Identity Card number of the user
@@ -154,6 +165,9 @@ router.post("/", async (req, res, next) => {
  *               maritalStatus:
  *                 type: string
  *                 description: Marital status of the user
+ *               aboutme:
+ *                 type: string
+ *                 description: Small introduction to yourself
  *               docId:
  *                 type: string
  *                 description: Id of the document
@@ -173,10 +187,12 @@ router.put("/", async (req, res, next) => {
     full_name: req.body.fullName,
     dob: req.body.dob,
     address: req.body.address,
+    phone: req.body.phone,
     nic: req.body.nic,
     gender: req.body.gender,
     nationality: req.body.nationality,
     marital_status: req.body.maritalStatus,
+    description: req.body.aboutme,
   };
 
   let docId = req.body.docId;

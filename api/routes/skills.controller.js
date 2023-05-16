@@ -78,7 +78,7 @@ router.get("/by-user/:email", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   let skill = {
     user: req.body.user,
-    company: req.body.skill,
+    skill: req.body.skill,
   };
 
   let result = await skillssService.createUpdateSkills(skill);
