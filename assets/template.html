@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>template</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        margin: 0px;
+      }
+
+      @import url("https://fonts.googleapis.com/css?family=Roboto:200,300,400,600,700");
+
+      * {
+        font-family: "Roboto", sans-serif;
+      }
+
+      p {
+        margin: 0px;
+      }
+
+      .container {
+        display: flex;
+      }
+
+      .column1 {
+        flex: 4;
+      }
+
+      .column2 {
+        flex: 1;
+      }
+
+      .bg-color-blue {
+        background: rgba(38, 72, 119, 1);
+      }
+
+      #name {
+        color: white;
+        font-size: 45px;
+        font-weight: 500;
+        margin: 30px 0px 15px 40px;
+      }
+
+      #designation {
+        font-weight: lighter;
+        font-size: 25px;
+        color: rgb(179, 179, 179);
+        margin: 15px 0px 30px 40px;
+      }
+
+      .contact {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 10px;
+      }
+
+      .contact div {
+        margin-left: 10px;
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        font-size: 1.5vw;
+      }
+
+      .contact div i {
+        margin-right: 5px;
+      }
+
+      .content {
+        padding: 0px 90px 0px 90px;
+        text-align: justify;
+        font-size: 1.1vw;
+        margin-bottom: 20px;
+      }
+
+      .content > p {
+        width: fit-content;
+        background-color: black;
+        color: white;
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .list-container {
+        height: 150px;
+        overflow: auto;
+        column-count: 2;
+        column-gap: 20px;
+      }
+
+      .point-list {
+        list-style-type: disc;
+        padding-inline-start: 20px;
+        margin-top: 0px;
+      }
+
+      .content div {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container bg-color-blue">
+      <div class="column1">
+        <p id="name">$name</p>
+        <p id="designation">$designation</p>
+      </div>
+      <div class="column2">
+        <div>
+          <!-- <img src="./dp.jpg" alt="" style="width: 160px; float: right" /> -->
+        </div>
+      </div>
+    </div>
+    <div class="contact">
+      <div><i class="fa fa-phone-square" aria-hidden="true"></i>$phone</div>
+      <div><i class="fa fa-envelope" aria-hidden="true"></i>$mail</div>
+      <div><i class="fa fa-globe" aria-hidden="true"></i>$location</div>
+    </div>
+    <div class="content">
+      <p>Personal Information</p>
+      <div>
+        <table>
+          <tr>
+            <td>Name</td>
+            <td>$name</td>
+          </tr>
+          <tr>
+            <td>Gender</td>
+            <td>$gender</td>
+          </tr>
+          <tr>
+            <td>Date of Birth</td>
+            <td>$dob</td>
+          </tr>
+          <tr>
+            <td>Marital Status</td>
+            <td>$maritalStatus</td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>$address</td>
+          </tr>
+          <tr>
+            <td>NIC</td>
+            <td>$nic</td>
+          </tr>
+          <tr>
+            <td>Nationality</td>
+            <td>$nationality</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="content">
+      <p>About me</p>
+      $aboutme
+    </div>
+    <div class="content">
+      <p>Core Skills</p>
+      <div class="list-container">
+        <ul class="point-list">
+          $skill
+        </ul>
+      </div>
+    </div>
+    <div class="content">
+      <p>Education</p>
+      <ul>
+        $edu
+      </ul>
+    </div>
+    <div class="content">
+      <p>Career Summary</p>
+      <ul>
+        $work
+      </ul>
+    </div>
+  </body>
+</html>
