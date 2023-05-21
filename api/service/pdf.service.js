@@ -24,6 +24,9 @@ async function generatePDF(req, id) {
   const browser = await puppeteer.launch({
     headless: "new",
   });
+
+  /* const browser = await chromium.puppeteer.launch({ headless: "new" }); */
+
   const page = await browser.newPage();
   await page.goto(`${host}/pdf/get/${id}`, {
     waitUntil: "domcontentloaded",
