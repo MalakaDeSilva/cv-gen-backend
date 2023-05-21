@@ -19,18 +19,16 @@ async function getData(userId) {
 }
 
 async function generatePDF(req, id) {
-    
   const host = `${req.protocol}://${req.hostname}:${8000}`;
 
   const browser = await puppeteer.launch({
     headless: "new",
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const page = await browser.newPage();
-  await page.goto(`${host}/pdf/get/` + id, {
-    waitUntil: "networkidle0",
+  await page.goto(`${host}/pdf/get/${id}`, {
+    waitUntil: "domcontentloaded",
   });
-  const pdf = await page.pdf({ format: "A4" });
+  const pdf = await page.pdf({ format: "A4", printBackground: true });
 
   await browser.close();
   return pdf;

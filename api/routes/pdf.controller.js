@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get("/get/:userId", async (req, res) => {
   let userId = req.params.userId;
-  
+
   let file = fs.readFileSync(
     path.resolve(__dirname, "../../assets/template.html"),
     "utf8"
@@ -17,10 +17,12 @@ router.get("/get/:userId", async (req, res) => {
   // TODO: Fill the html template
   let { work, skills, education, personal } = await pdfService.getData(userId);
 
-  file = file.replace("$name", personal.full_name);
-  file = file.replace("$name", personal.full_name);
+  file = file.replace("$name", `${personal.firstName} ${personal.lastName}`);
+  file = file.replace("$name", `${personal.firstName} ${personal.lastName}`);
   file = file.replace("$designation", "Engineer");
   file = file.replace("$phone", personal.phone);
+  file = file.replace("$phone", personal.phone);
+  file = file.replace("$mail", personal.user);
   file = file.replace("$mail", personal.user);
   file = file.replace("$location", "Sri Lanka");
   file = file.replace("$gender", personal.gender);
@@ -32,7 +34,7 @@ router.get("/get/:userId", async (req, res) => {
   file = file.replace("$aboutme", personal.description);
 
   let skillsList = "";
-  
+
   skills.forEach((skill) => (skillsList += `<li>${skill.skill}</li>`));
 
   file = file.replace("$skill", skillsList);
@@ -91,7 +93,7 @@ router.get("/get/:userId", async (req, res) => {
   res.status(200).send(file);
 });
 
-router.get("/generate/:userId", async (req, res) => {
+router.get("/generate/:userId/:time", async (req, res) => {
   let file = await pdfService.generatePDF(req, req.params.userId);
 
   res.set({ "Content-Type": "application/pdf", "Content-Length": file.length });

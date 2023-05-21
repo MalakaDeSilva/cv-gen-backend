@@ -85,6 +85,7 @@ router.post("/", async (req, res, next) => {
   let workDetails = {
     user: req.body.user,
     company: req.body.company,
+    job_title: req.body.jobTitle,
     period: req.body.period,
     remarks: req.body.remarks,
   };
@@ -142,6 +143,7 @@ router.put("/", async (req, res, next) => {
     user: req.body.user,
     company: req.body.company,
     period: req.body.period,
+    job_title: req.body.jobTitle,
     remarks: req.body.remarks,
   };
 
