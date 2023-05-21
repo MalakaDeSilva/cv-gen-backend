@@ -102,8 +102,10 @@ router.get("/by-user/:email", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   let personalDetails = {
     user: req.body.user,
-    full_name: req.body.fullName,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     dob: req.body.dob,
+    profession: req.body.profession,
     address: req.body.address,
     phone: req.body.phone,
     nic: req.body.nic,
@@ -184,8 +186,10 @@ router.post("/", async (req, res, next) => {
 router.put("/", async (req, res, next) => {
   let personalDetails = {
     user: req.body.user,
-    full_name: req.body.fullName,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     dob: req.body.dob,
+    profession: req.body.profession,
     address: req.body.address,
     phone: req.body.phone,
     nic: req.body.nic,
