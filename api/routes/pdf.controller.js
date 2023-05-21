@@ -93,7 +93,7 @@ router.get("/get/:userId", async (req, res) => {
   res.status(200).send(file);
 });
 
-router.get("/generate/:userId", async (req, res) => {
+router.get("/generate/:userId/:time", async (req, res) => {
   let file = await pdfService.generatePDF(req, req.params.userId);
 
   res.set({ "Content-Type": "application/pdf", "Content-Length": file.length });
