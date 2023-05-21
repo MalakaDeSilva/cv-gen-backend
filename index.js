@@ -2,8 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-/* const swaggerUi = require("swagger-ui-express");
-const swagger = require("./swagger"); */
+const swaggerUi = require("swagger-ui-express");
+const swagger = require("./swagger");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -26,8 +26,8 @@ app.use(
     extended: true,
   })
 );
-/* 
-app.use("/api-docs", swaggerUi.serve, swagger); */
+
+app.use("/api-docs", swaggerUi.serve, swagger);
 app.use("/edu-details", /* authenticateJWT, */ eduDetailsRoute);
 app.use("/work-details", /* authenticateJWT, */ workDetailsRoute);
 app.use("/personal-details", /* authenticateJWT, */ personalDetailsRoute);

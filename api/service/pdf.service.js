@@ -1,9 +1,8 @@
-/* const puppeteer = require("puppeteer"); */
+const puppeteer = require("puppeteer");
 const workService = require("../service/work.service");
 const personalDetService = require("../service/personal.info.service");
 const skillsService = require("../service/skills.service");
 const eduService = require("../service/edu.service");
-const chromium = require("chrome-aws-lambda");
 
 async function getData(userId) {
   let workInfo = await workService.getWorkDetailsByUser(userId);
@@ -22,11 +21,11 @@ async function getData(userId) {
 async function generatePDF(req, id) {
   const host = `${req.protocol}://${req.hostname}:${8000}`;
 
-  /* const browser = await puppeteer.launch({
+  const browser = await puppeteer.launch({
     headless: "new",
-  }); */
+  });
 
-  const browser = await chromium.puppeteer.launch({ headless: "new" });
+  /* const browser = await chromium.puppeteer.launch({ headless: "new" }); */
 
   const page = await browser.newPage();
   await page.goto(`${host}/pdf/get/${id}`, {
