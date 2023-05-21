@@ -1,4 +1,4 @@
-const puppeteer = require("puppeteer");
+/* const puppeteer = require("puppeteer"); */
 const workService = require("../service/work.service");
 const personalDetService = require("../service/personal.info.service");
 const skillsService = require("../service/skills.service");
@@ -27,7 +27,7 @@ async function generatePDF(req, id) {
   }); */
 
   const browser = await chromium.puppeteer.launch({ headless: "new" });
-  
+
   const page = await browser.newPage();
   await page.goto(`${host}/pdf/get/${id}`, {
     waitUntil: "domcontentloaded",
