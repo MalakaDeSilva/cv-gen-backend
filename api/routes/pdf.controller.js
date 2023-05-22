@@ -6,7 +6,7 @@ const pdfService = require("../service/pdf.service");
 
 const router = express.Router();
 
-router.get("/get/:userId", async (req, res) => {
+router.get("/get/:userId/:time", async (req, res) => {
   let userId = req.params.userId;
 
   let file = fs.readFileSync(
