@@ -18,6 +18,8 @@ const { authenticateJWT } = require("./api/routes/auth.controller");
 
 const PORT = process.env.PORT;
 
+app.use("/assets", express.static(__dirname + "/assets"));
+
 app.use(cors());
 
 app.use(express.json());
