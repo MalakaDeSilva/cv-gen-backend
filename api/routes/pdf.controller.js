@@ -1,12 +1,14 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
+const { addGeneratedPDF } = require("../service/analytics.service");
 
 const pdfService = require("../service/pdf.service");
 
 const router = express.Router();
 
 router.get("/get/:userId", async (req, res) => {
+  addGeneratedPDF();
   let userId = req.params.userId;
 
   let file = fs.readFileSync(
