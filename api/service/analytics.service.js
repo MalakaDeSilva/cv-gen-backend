@@ -21,7 +21,7 @@ function addGeneratedPDF() {
   getGeneratedPDFs()
     .then((doc) => {
       const docRef = db.collection("analytics").doc("generated_pdfs");
-      
+
       docRef.set({
         ...doc.data(),
         count: ++doc.data().count,
@@ -33,4 +33,5 @@ function addGeneratedPDF() {
 
 module.exports = {
   addGeneratedPDF,
+  getGeneratedPDFs,
 };

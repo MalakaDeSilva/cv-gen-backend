@@ -1,11 +1,22 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const { addGeneratedPDF } = require("../service/analytics.service");
+const {
+  addGeneratedPDF,
+  getGeneratedPDFs,
+} = require("../service/analytics.service");
 
 const pdfService = require("../service/pdf.service");
 
 const router = express.Router();
+
+router.get("/get-generated", (req, res) => {
+  getGeneratedPDFs()
+    .then((doc) => {
+      res.status(200).json(doc.data());
+    })
+    .catch((err) => res.status(200).json({ error: err.message }));
+});
 
 router.get("/get/:userId", async (req, res) => {
   addGeneratedPDF();
